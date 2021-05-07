@@ -1,0 +1,247 @@
+{
+	"compiler": {
+		"version": "0.8.1+commit.df193b15"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "fee",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "memberAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "memberName",
+						"type": "string"
+					}
+				],
+				"name": "addPlayer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cancelLeague",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "newComissioner",
+						"type": "address"
+					}
+				],
+				"name": "changeComissioner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkMoney",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "commissioner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "firstPlace",
+						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "secondPlace",
+						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "thirdPlace",
+						"type": "address"
+					}
+				],
+				"name": "declareWinners",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getWinners",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "addr",
+								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "hasPaid",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct FFContract.Player",
+						"name": "",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "addr",
+								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "hasPaid",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct FFContract.Player",
+						"name": "",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "addr",
+								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "hasPaid",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct FFContract.Player",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "payDues",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "rescueMoney",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startLeague",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"github/infydevday/ff-esc/src/contracts/FFContract.sol": "FFContract"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"github/infydevday/ff-esc/src/contracts/FFContract.sol": {
+			"keccak256": "0xc693fdff111c205ecafe14fa099000a9e8b578596fd92f6663f2af7781c420a4",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://c24ecf2adca1ed7365805f6fe8a62b8327862d5abdb4ca679797661cc1aa8e77",
+				"dweb:/ipfs/QmP1azJWoZY2DysAe5kA5FdpzojFgUu31YKH3g8muSY8UQ"
+			]
+		},
+		"github/infydevday/ff-esc/src/contracts/Math.sol": {
+			"keccak256": "0x23ae1d5710acbb28c5a109f366f895d88877e2129ca08796f368170380c60752",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://65d73cbeee89af5a9c8968ffcfcd571db3bb1a0b53788cb0c05d3363a1f7d1f3",
+				"dweb:/ipfs/QmPqaVip5Lw45MyqecfL4jS4bjE4NtFmDvjyeYBpwscVCr"
+			]
+		}
+	},
+	"version": 1
+}
