@@ -3,13 +3,25 @@
     try {
         console.log('Running deployWithWeb3 script...')
 
+        await window.ethereum.enable();
 
-        const metadata = await fetch('contracts/artifacts/FFContract_metadata.json')
-            .then(response => response.json())
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
 
-        const account = await ethereum
-            .request({ method: 'eth_requestAccounts' })
-            .then(accounts => accounts[0]);
+        const daiAddress = "0xef4873403430b2d1fab44a4561930a829cf55022";
+
+        const metadata = await fetch('contracts/artifacts/FFContract.json')
+            .then(response => response.json());
+
+        const daiContract = new ethers.Contract(daiAddress, metadata.abi, provider);
+
+
+        const commish = await (daiContract.commissioner())
+        console.log(commish)
+
+        // const account = await ethereum
+        //     .request({ method: 'eth_requestAccounts' })
+        //     .then(accounts => accounts[0]);
     
         window.commissioner = null;
         window.players = [];
