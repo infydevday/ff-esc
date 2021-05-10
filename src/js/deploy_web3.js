@@ -3,26 +3,34 @@
     try {
         console.log('Running deployWithWeb3 script...')
 
-        await window.ethereum.enable();
+        //await window.ethereum.enable();
+
+        const account = await ethereum
+            .request({ method: 'eth_requestAccounts' })
+            .then(accounts => accounts[0]);
+    
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
 
-        const daiAddress = "0xef4873403430b2d1fab44a4561930a829cf55022";
+        const signer = provider.getSigner(account);
+
+
+        console.log(provider)
+        console.log(signer)
+
+        const daiAddress = "0x06e9981C406a58C4E9Ab5173612F372c04b857B5";
 
         const metadata = await fetch('contracts/artifacts/FFContract.json')
             .then(response => response.json());
 
         const daiContract = new ethers.Contract(daiAddress, metadata.abi, provider);
+        const daiWithSigner = daiContract.connect(signer);
 
-
+        console.log(daiWithSigner)
+        
         const commish = await (daiContract.commissioner())
         console.log(commish)
 
-        // const account = await ethereum
-        //     .request({ method: 'eth_requestAccounts' })
-        //     .then(accounts => accounts[0]);
-    
         window.commissioner = null;
         window.players = [];
 
@@ -37,6 +45,13 @@
             });
             updatePlayerView();
         };
+
+        window.startLeague = () => {
+            Promise.all(players.map ( player => 
+                daiWithSigner.addPlayer(player.addr, player.name)
+            )).then(() => console.log("started league"));
+        };
+
 
         removePlayer = (index) => {
             players = players.filter((_, i) => i != index);
