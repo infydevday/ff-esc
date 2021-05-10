@@ -105,6 +105,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "getEntryFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getWinners",
 				"outputs": [
 					{
@@ -227,11 +240,11 @@
 	},
 	"sources": {
 		"github/infydevday/ff-esc/src/contracts/FFContract.sol": {
-			"keccak256": "0xc693fdff111c205ecafe14fa099000a9e8b578596fd92f6663f2af7781c420a4",
+			"keccak256": "0xb42093c996c4a1adcb5f801231d21375b431cb58af993ff4ea4f1d495bac37b5",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://c24ecf2adca1ed7365805f6fe8a62b8327862d5abdb4ca679797661cc1aa8e77",
-				"dweb:/ipfs/QmP1azJWoZY2DysAe5kA5FdpzojFgUu31YKH3g8muSY8UQ"
+				"bzz-raw://e970446b83bff564662e8ff585dd8eed463ada10692ac24257a81bbf702fbf08",
+				"dweb:/ipfs/QmWWU77wkRVr82jZRJuttXCKswxFuN18xTs31amnuR1X9Q"
 			]
 		},
 		"github/infydevday/ff-esc/src/contracts/Math.sol": {

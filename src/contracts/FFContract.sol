@@ -128,6 +128,9 @@ contract FFContract {
     function checkMoney() external view returns (uint256) {
         return address(this).balance;
     }
+    function getEntryFee() external view returns (uint256) {
+        return entryFee;
+    }
     function rescueMoney() external isComissioner  {
         commissioner.transfer(address(this).balance);
     }

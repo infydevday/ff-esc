@@ -3,7 +3,7 @@
     try {
         console.log('Running deployWithWeb3 script...')
 
-        //await window.ethereum.enable();
+        await window.ethereum.enable();
 
         const account = await ethereum
             .request({ method: 'eth_requestAccounts' })
@@ -18,17 +18,27 @@
         console.log(provider)
         console.log(signer)
 
-        const daiAddress = "0x06e9981C406a58C4E9Ab5173612F372c04b857B5";
+        // const daiAddress = "0x06e9981C406a58C4E9Ab5173612F372c04b857B5";
+        const daiAddress = "0x24Ae7B0500Bc7d54Acc28bF37e26a4B4795d312e";
 
         const metadata = await fetch('contracts/artifacts/FFContract.json')
             .then(response => response.json());
 
         const daiContract = new ethers.Contract(daiAddress, metadata.abi, provider);
+        window.contract = daiContract;
         const daiWithSigner = daiContract.connect(signer);
+
+        window.signedContract = daiWithSigner;
 
         console.log(daiWithSigner)
         
         const commish = await (daiContract.commissioner())
+
+        const entryFee = await daiContract.getEntryFee().then((fee) => {
+            $('#pay').text('Pay ' + fee + ' wei');
+        });
+
+        console.log(entryFee);
         console.log(commish)
 
         window.commissioner = null;
@@ -46,16 +56,22 @@
             updatePlayerView();
         };
 
+
         window.startLeague = () => {
             Promise.all(players.map ( player => 
                 daiWithSigner.addPlayer(player.addr, player.name)
-            )).then(() => console.log("started league"));
+            )).then(() => daiWithSigner.startLeague());
         };
+
 
 
         removePlayer = (index) => {
             players = players.filter((_, i) => i != index);
             updatePlayerView();
+        };
+
+        payDues = (amount) => {
+            daiWithSigner.payDues({value: 10});
         };
 
         updatePlayerView = () => {
