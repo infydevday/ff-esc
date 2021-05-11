@@ -1,7 +1,28 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.7.0 <0.9.0;
-import "./Math.sol";
 contract FFContract {
+
+    function ceil(uint a, uint m) internal pure returns (uint) {
+        return ((a + m - 1) / m) * m;
+    }
+
+    function max(uint a, uint b) internal pure returns (uint) {
+        uint maxValue;
+        if (a > b) {
+            maxValue = a;
+        } else {
+            maxValue = b;
+        }
+        return maxValue;
+    }
+
+    function calculatePayout(uint x) internal pure returns (uint, uint, uint) {
+        uint payoutThird = max(1, ceil(x * 10 / 100, 1));
+        uint payoutSecond = max(1, ceil(x * 30 / 100, 1));
+        uint payoutFirst = x - payoutThird - payoutSecond;
+        return (payoutFirst, payoutSecond, payoutThird);
+    }
+
     struct Player {
         string name;
         address payable addr;
@@ -110,7 +131,7 @@ contract FFContract {
         thirdPlaceAddr = thirdPlace;
         leagueEnded = true;
         // Pay winners
-        (uint payoutFirst, uint payoutSecond, uint payoutThird) = Math.calculatePayout(address(this).balance);
+        (uint payoutFirst, uint payoutSecond, uint payoutThird) = calculatePayout(address(this).balance);
         firstPlace.transfer(payoutFirst);
         secondPlace.transfer(payoutSecond);
         thirdPlace.transfer(payoutThird);
