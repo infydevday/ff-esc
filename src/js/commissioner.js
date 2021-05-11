@@ -7,14 +7,14 @@
         window.onload = () => {
             new WOW().init();
             console.log($('#content').html(`
-                <div class="container" id="content">
+                <div class="container" id="content" >
                     <div class="row" style="height: 30vh;"></div>
                     <div class="row wow bounceInUp">
                         <div class="col">
                         </div>
                         <div class="col">
                             <div class="row mt-5">
-                                <form>
+                                <form class="bg-white rounded p-3">
                                     <div class="mb-3">
                                     <label for="fee" class="form-label">Entry Fee</label>
                                     <input type="fee" class="form-control" id="fee" value="10">
@@ -54,12 +54,12 @@
 
         const addPlayersPage = () => {
             $('#content').html(`
-                <div class="container" id="content">
+                <div class="container bg-white rounded p-3" id="content" style="width:50vw; margin:auto">
                     <div class="row mt-5"></div>
                     <div class="row">
                         <div class="col">
                             <div class="row">
-                                <form>
+                                <form class="bg-white rounded p-3>
                                     <div class="mb-3">
                                     <label for="commishAddr" class="form-label">Commissioner Address</label>
                                     <input type="commishAddr" class="form-control" id="commishAddr">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                <form>
+                                <form class="bg-white rounded p-3>
                                     <div class="mb-3">
                                     <label for="playerName" class="form-label">Name</label>
                                     <input type="playerName" class="form-control" id="playerName">
@@ -84,7 +84,7 @@
                                     <button type="button" class="btn btn-primary" onclick="addPlayer();">Add Player</button>
                                 </form>
                             </div>
-                            <div class="row mt-5">
+                            <div class="row mt-5 class="bg-white rounded p-3">
                                 <ul class="list-group">
                                     <span id="player-list">
                                     </span>
@@ -105,7 +105,7 @@
 
         const declareWinnersPage = () => {
             $('#content').html(`
-                <div class="container" id="content">
+                <div class="container bg-white rounded p-3" id="content" style="height: 20vh; width:40vw; margin: auto">
                     <div class="row mt-5"></div>
                     <div class="row">
                         <div class="col">
@@ -143,7 +143,7 @@
                 <div class="container" id="content">
                     <div class="row mt-5"></div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col bg-white rounded p-3">
                             <div class="row">
                                 <div class="input-group mb-3">
                                 <input type="text" class="form-control" value="${daiAddress}">

@@ -43,7 +43,7 @@
             daiContract.getEntryFee().then((fee) => {
                 entryFee = fee;
                 $('#content').html( `
-                            <form>
+                            <form class="bg-white rounded p-3">
                                 <button type="button" class="btn btn-primary" onclick="payFoo();" id="pay">Pay ${fee} wei</button>
                             </form>
                 `);
@@ -56,7 +56,7 @@
 
         $('#content').html( `
         
-                    <form>
+                    <form class="bg-white rounded p-3">
                         <div class="mb-3">
                         <label for="fee" class="form-label">Contract</label>
                         <input type="fee" class="form-control" id="contract-addr">
