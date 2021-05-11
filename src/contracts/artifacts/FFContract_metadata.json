@@ -19,17 +19,24 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address payable",
-						"name": "memberAddr",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "memberName",
-						"type": "string"
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "addr",
+								"type": "address"
+							}
+						],
+						"internalType": "struct FFContract.LeaguePlayer[]",
+						"name": "leaguePlayers",
+						"type": "tuple[]"
 					}
 				],
-				"name": "addPlayer",
+				"name": "addPlayers",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -111,6 +118,36 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPlayers",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "addr",
+								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "hasPaid",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct FFContract.Player[]",
+						"name": "",
+						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "view",
@@ -240,11 +277,11 @@
 	},
 	"sources": {
 		"github/infydevday/ff-esc/src/contracts/FFContract.sol": {
-			"keccak256": "0xb42093c996c4a1adcb5f801231d21375b431cb58af993ff4ea4f1d495bac37b5",
+			"keccak256": "0x74b69278773b1c1dd14540cbb1b7aaeecca616e5ead885355ea040b6527a9406",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://e970446b83bff564662e8ff585dd8eed463ada10692ac24257a81bbf702fbf08",
-				"dweb:/ipfs/QmWWU77wkRVr82jZRJuttXCKswxFuN18xTs31amnuR1X9Q"
+				"bzz-raw://b5a5e407937f2c3f3906caa45330d0726a4d1f900a0c019e5988c7a2280217d2",
+				"dweb:/ipfs/QmamKaDoLp4CwdEunMva9B1ELPSG5JknkpDBd6QziEttxr"
 			]
 		},
 		"github/infydevday/ff-esc/src/contracts/Math.sol": {

@@ -1,9 +1,38 @@
 // Right click on the script name and hit "Run" to execute
 (async () => {
     try {
-        console.log('Running deployWithWeb3 script...')
+
+
+    
+        window.onload = () => {
+            console.log($('#content').html(`
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                        </div>
+                        <div class="col">
+                            <div class="row mt-5">
+                                <form>
+                                    <div class="mb-3">
+                                    <label for="fee" class="form-label">Entry Fee</label>
+                                    <input type="fee" class="form-control" id="fee">
+                                    <div id="" class="form-text">Fee to enter the league</div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="deployContract();">Deploy Contract</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                </div>
+            `));
+        };
 
         await window.ethereum.enable();
+
+        const metadata = await fetch('contracts/artifacts/FFContract.json')
+            .then(response => response.json());
 
         const account = await ethereum
             .request({ method: 'eth_requestAccounts' })
@@ -11,18 +40,32 @@
     
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-
         const signer = provider.getSigner(account);
 
+        window.deployContract = () => {
+            console.log("working");
+            var ABI = metadata.abi;
+            var BYT = metadata.data.bytecode.object;
+            
+            const simpleContractFactory = new ethers.ContractFactory(ABI, BYT, signer)
+            const simpleContract = simpleContractFactory
+            .deploy()
+            .then(() => simpleContract.deployTransaction.wait())
+            .then(console.log)
+        };
+
+        console.log('Running deployWithWeb3 script...')
+
+
+
+        
 
         console.log(provider)
         console.log(signer)
 
         // const daiAddress = "0x06e9981C406a58C4E9Ab5173612F372c04b857B5";
-        const daiAddress = "0x24Ae7B0500Bc7d54Acc28bF37e26a4B4795d312e";
+        const daiAddress = "0x5A8a896A095e4d579E30c952E97EC3A2CD63F111";
 
-        const metadata = await fetch('contracts/artifacts/FFContract.json')
-            .then(response => response.json());
 
         const daiContract = new ethers.Contract(daiAddress, metadata.abi, provider);
         window.contract = daiContract;
@@ -34,9 +77,9 @@
         
         const commish = await (daiContract.commissioner())
 
-        const entryFee = await daiContract.getEntryFee().then((fee) => {
-            $('#pay').text('Pay ' + fee + ' wei');
-        });
+        // const entryFee = await daiContract.getEntryFee().then((fee) => {
+        //     $('#pay').text('Pay ' + fee + ' wei');
+        // });
 
         console.log(entryFee);
         console.log(commish)
@@ -44,9 +87,6 @@
         window.commissioner = null;
         window.players = [];
 
-        window.deployContract = () => {
-            console.log("working");
-        };
 
         window.addPlayer = (player) => {
             players.push({
@@ -58,9 +98,13 @@
 
 
         window.startLeague = () => {
-            Promise.all(players.map ( player => 
-                daiWithSigner.addPlayer(player.addr, player.name)
-            )).then(() => daiWithSigner.startLeague());
+            const args = players.map((player) => {
+                return [player.name, player.addr];
+            });
+            
+            daiWithSigner
+                .addPlayers(args)
+                .then(() => daiWithSigner.startLeague());
         };
 
 
