@@ -7,6 +7,12 @@ contract FFContract {
         address payable addr;
         bool hasPaid;
     }
+    
+    struct LeaguePlayer {
+        string name;
+        address payable addr;
+    }
+    
     address payable public commissioner;
     uint256 private entryFee;
     Player[] private players;    
@@ -19,18 +25,28 @@ contract FFContract {
         commissioner = payable(msg.sender);
         entryFee = fee;
     }
-    // League Functions
-    function addPlayer(address payable memberAddr, string memory memberName) external isComissioner leagueHasNotStarted {
-        require(bytes(memberName).length != 0, "Must include member name");
-        for(uint i = 0; i < players.length; ++i) {
-            require(players[i].addr != memberAddr, "This address already exists");
+    
+    // League functions
+    function addPlayers(LeaguePlayer[] memory leaguePlayers) external isComissioner leagueHasNotStarted {
+  
+        for(uint i = 0; i < leaguePlayers.length; ++i) {
+            require(bytes(leaguePlayers[i].name).length != 0, "Must include member name");
+
+            for(uint k = 0; k < players.length; ++k) {
+                require(players[k].addr != leaguePlayers[i].addr, "This player address already exists");
+            }
         }
-        players.push(Player({
-            name: memberName,
-            addr: memberAddr,
-            hasPaid: false
-        }));
+        
+        for(uint i = 0; i < leaguePlayers.length; ++i) {
+            players.push(Player({
+                name: leaguePlayers[i].name,
+                addr: leaguePlayers[i].addr,
+                hasPaid: false
+            }));
+        }
     }
+    
+
     function payDues() external payable leagueHasNotStarted {
         require(msg.value == entryFee, "You gotta pay some wei");
         bool foundPlayer = false;
@@ -111,7 +127,7 @@ contract FFContract {
     }
     // Utility Functions
     modifier isComissioner() {
-        require(msg.sender == commissioner, "Only current commissioner can change commissioner");
+        require(msg.sender == commissioner, "This can only be called by the commissioner");
         _;
     }
     modifier leagueHasNotStarted() {
@@ -130,6 +146,9 @@ contract FFContract {
     }
     function getEntryFee() external view returns (uint256) {
         return entryFee;
+    }
+    function getPlayers() external isComissioner view returns (Player[] memory) {
+        return players;
     }
     function rescueMoney() external isComissioner  {
         commissioner.transfer(address(this).balance);
