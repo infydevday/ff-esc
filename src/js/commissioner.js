@@ -5,9 +5,11 @@
 
     
         window.onload = () => {
+            new WOW().init();
             console.log($('#content').html(`
                 <div class="container" id="content">
-                    <div class="row">
+                    <div class="row" style="height: 30vh;"></div>
+                    <div class="row wow bounceInUp">
                         <div class="col">
                         </div>
                         <div class="col">
